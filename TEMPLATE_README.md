@@ -35,11 +35,9 @@ cd cursor-api-template
 
 1. Copy `AI_COLLABORATION_PROTOCOL.md` and `PROGRESS_TRACKER.md` to your project root.
 2. (Optional) Copy `.vscode/` folder to get the Markdown styling in your new project.
-3. **Important:** Add the template files to your project's `.gitignore` to prevent conflicts (see [TEMPLATE_README.md](TEMPLATE_README.md) for examples).
+3. Add the template files to your project's `.gitignore` (see example below).
 4. Tell your Cursor Agent:
    > "Read `AI_COLLABORATION_PROTOCOL.md` and follow the efficiency rules. Use `PROGRESS_TRACKER.md` to log our session usage."
-
-> **Note:** See [TEMPLATE_README.md](TEMPLATE_README.md) for complete setup instructions, including `.gitignore` examples and code snippets.
 
 ---
 
@@ -69,6 +67,43 @@ cp "$HOME/Library/Application Support/Cursor/User/keybindings.json" config/keybi
 # Linux
 cp "$HOME/.config/Cursor/User/settings.json" config/global-settings.json
 cp "$HOME/.config/Cursor/User/keybindings.json" config/keybindings.json
+```
+
+---
+
+## 📝 Adding Template Files to .gitignore
+
+When you copy template files into a new project, add them to your project's `.gitignore` to prevent conflicts:
+
+**Example .gitignore entries:**
+```gitignore
+# Cursor API Template files (project-specific, not tracked)
+AI_COLLABORATION_PROTOCOL.md
+PROGRESS_TRACKER.md
+```
+
+**Or if you want to keep them but track them separately:**
+```gitignore
+# Cursor API Template files (optional - remove if you want to track these)
+# AI_COLLABORATION_PROTOCOL.md
+# PROGRESS_TRACKER.md
+```
+
+**Example code to add to .gitignore (PowerShell):**
+```powershell
+# Add template files to .gitignore
+Add-Content -Path .gitignore -Value "`n# Cursor API Template files"
+Add-Content -Path .gitignore -Value "AI_COLLABORATION_PROTOCOL.md"
+Add-Content -Path .gitignore -Value "PROGRESS_TRACKER.md"
+```
+
+**Example code to add to .gitignore (Bash):**
+```bash
+# Add template files to .gitignore
+echo "" >> .gitignore
+echo "# Cursor API Template files" >> .gitignore
+echo "AI_COLLABORATION_PROTOCOL.md" >> .gitignore
+echo "PROGRESS_TRACKER.md" >> .gitignore
 ```
 
 ---
