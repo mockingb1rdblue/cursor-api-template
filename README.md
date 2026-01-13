@@ -1,18 +1,24 @@
-# Cursor API Rate Limit Template
+# 🚀 Cursor API Rate Limit Template
 **Purpose:** Reusable framework for managing LLM (Gemini/Sonnet) rate limits and token efficiency in Cursor projects.
 
 ---
 
-## 🚀 How to Install
-1.  **Copy Files:** Copy `AI_COLLABORATION_PROTOCOL.md` and `PROGRESS_TRACKER.md` into the root of your new Cursor project.
-2.  **Initialize Tracker:** Open `PROGRESS_TRACKER.md` and set your starting session timestamp.
-3.  **Command the AI:** Tell Cursor: *"Follow the AI Collaboration Protocol in the root directory to manage rate limits and token usage."*
+## ⚡ QUICK START: READ THIS FIRST
+To ensure maximum token efficiency and avoid "429 Rate Limit" errors, you **must** call this protocol early in your project life-cycle.
+
+### 1. Install Files
+Copy `AI_COLLABORATION_PROTOCOL.md` and `PROGRESS_TRACKER.md` into your project's root directory.
+
+### 2. Give Context to your Cursor Agent
+Immediately after installing, paste the following command into your Cursor Agent chat:
+
+> **"Please read the `AI_COLLABORATION_PROTOCOL.md` in the root directory. From now on, follow the Batching, Caching, and Token Efficiency rules defined there. Use `PROGRESS_TRACKER.md` to log our session usage and ensure we stay under the 1M token/minute limit."**
 
 ---
 
-## 📋 Contents
-*   **[AI_COLLABORATION_PROTOCOL.md](AI_COLLABORATION_PROTOCOL.md)**: Core strategy (Batching, Caching, Efficiency).
-*   **[PROGRESS_TRACKER.md](PROGRESS_TRACKER.md)**: Session-based token usage log.
+## 📋 What's Included?
+*   **[AI_COLLABORATION_PROTOCOL.md](AI_COLLABORATION_PROTOCOL.md)**: The "Rules of Engagement" for the AI (Grouped reads, atomic edits, internal caching).
+*   **[PROGRESS_TRACKER.md](PROGRESS_TRACKER.md)**: A structured log for tracking tokens turn-by-turn.
 
 ---
 **Author:** Adam Scheurer  
