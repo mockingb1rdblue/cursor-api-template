@@ -1,6 +1,6 @@
 # IDE files
 .cursor/
-.vscode/
+# Note: .vscode/ is intentionally tracked (contains template settings)
 
 # OS files
 .DS_Store

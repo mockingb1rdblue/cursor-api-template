@@ -1,0 +1,86 @@
+/* Dark mode styles for Markdown preview */
+body {
+    background-color: #282a36 !important;
+    color: #f8f8f2 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #bd93f9 !important;
+}
+
+a {
+    color: #8be9fd !important;
+}
+
+a:hover {
+    color: #50fa7b !important;
+}
+
+/* Code blocks (pre elements) */
+pre {
+    background-color: #1e1e1e !important;
+    border: 1px solid #44475a !important;
+    color: #f8f8f2 !important;
+}
+
+/* Inline code */
+code {
+    background-color: #44475a !important;
+    color: #f8f8f2 !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+}
+
+/* Code inside pre blocks (code blocks) */
+pre code {
+    background-color: transparent !important;
+    color: #f8f8f2 !important;
+    padding: 0 !important;
+}
+
+/* Ensure all code elements have proper colors */
+code, pre, pre code {
+    color: #f8f8f2 !important;
+}
+
+/* Specific fix for code blocks in markdown */
+.markdown-body pre,
+.markdown-body pre code,
+body pre,
+body pre code {
+    background-color: #1e1e1e !important;
+    color: #f8f8f2 !important;
+}
+
+blockquote {
+    border-left: 4px solid #bd93f9 !important;
+    background-color: #44475a !important;
+    color: #f8f8f2 !important;
+}
+
+table th {
+    background-color: #44475a !important;
+    color: #f8f8f2 !important;
+    border: 1px solid #6272a4 !important;
+}
+
+table td {
+    border: 1px solid #6272a4 !important;
+    color: #f8f8f2 !important;
+}
+
+tr:nth-child(even) {
+    background-color: #282a36 !important;
+}
+
+tr:nth-child(odd) {
+    background-color: #1e1e1e !important;
+}
+
+hr {
+    border-color: #6272a4 !important;
+}
+
+::selection {
+    background-color: #44475a !important;
+}

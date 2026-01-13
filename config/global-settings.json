@@ -1,0 +1,11 @@
+{
+    "workbench.startupEditor": "none",
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "explorer.confirmDragAndDrop": false,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "cursor.general.disableHttp2": true,
+    "git.openRepositoryInParentFolders": "always",
+    "workbench.editor.editorActionsLocation": "titleBar"
+}
