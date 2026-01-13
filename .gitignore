@@ -1,0 +1,15 @@
+# IDE files
+.cursor/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.log
+
+# Sensitive info (just in case)
+.env
+api_keys.txt

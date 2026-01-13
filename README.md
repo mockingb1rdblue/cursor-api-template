@@ -21,5 +21,5 @@ Immediately after installing, paste the following command into your Cursor Agent
 *   **[PROGRESS_TRACKER.md](PROGRESS_TRACKER.md)**: A structured log for tracking tokens turn-by-turn.
 
 ---
-**Author:** Adam Scheurer  
+**Author:** mock1ng  
 **Last Updated:** January 13, 2026
