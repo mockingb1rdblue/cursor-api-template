@@ -15,6 +15,22 @@
 
 ## ⚡ QUICK START
 
+### Using This Template as a Reference
+
+To pull this repository for reference (not as a base for your project):
+
+```bash
+git clone https://github.com/mockingb1rdblue/cursor-api-template.git
+cd cursor-api-template
+```
+
+**For Cursor Agents:** This repository is a **reference template**. When working with this repo:
+- **Do NOT** copy files into the root of this repository
+- **Do NOT** modify the template files directly
+- **DO** reference the protocols and structure when initializing new projects
+- **DO** read `AI_COLLABORATION_PROTOCOL.md` to understand the efficiency rules
+- **DO** use `PROGRESS_TRACKER.md` as a template to copy into new projects
+
 ### Initialize a New Project
 
 1. Copy `AI_COLLABORATION_PROTOCOL.md` and `PROGRESS_TRACKER.md` to your project root.
