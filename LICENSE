@@ -1,13 +1,18 @@
-MIT License
+The "No-Sell" Open Source License
 
 Copyright (c) 2026 mock1ng
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+to use, copy, modify, merge, publish, distribute, and share copies of the 
+Software, subject to the following conditions:
+
+1. NO SALE: The Software, or any derivative work, may not be sold, sublicensed, 
+   or exchanged for any form of compensation. It must remain free for everyone.
+
+2. OPEN SOURCE: The source code must remain available and open for modification 
+   and redistribution under these same terms.
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.

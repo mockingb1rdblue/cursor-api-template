@@ -1,43 +1,91 @@
-# AI Collaboration Protocol: Rate Limit & Efficiency Master Guide
-**For:** Gemini/Claude API (e.g., 1M tokens/minute cap)  
+# AI Collaboration Protocol: Cline + DeepSeek/Gemini
 
----
+**For:** Cline using DeepSeek Reasoning as **Plan**, Gemini Flash 3 as **Act**.
 
-## 🎯 1. Strategy: Batch, Cache, Optimize
+***
 
-### Token Budget Management
-- **Target:** Stay under 80% of the minute limit (e.g., 800,000 for a 1M cap).
-- **Emergency:** If hitting 90%+, pause 30-60 seconds before the next batch.
+## 🎯 1. Strategy: Roles and "Single Source of Truth"
 
-### Caching Protocol (Internal)
-- **Read Once:** The AI should maintain a session memory. Do NOT re-read files unless they have been modified.
-- **Reference Content:** Reference line numbers from previous reads instead of re-pulling full text.
-- **Summary Caching:** For large files, use generated summaries.
+### Role Assignment
 
-### Batching Protocol
-- **Parallel Reads:** Group related file reads (up to 10) in a single turn.
-- **Atomic Edits:** Combine multiple search/replace or write operations into one response.
-- **Consolidated Commands:** Group terminal commands with `&&` or `;`.
+- **Planner (DeepSeek Reasoning):**
+  - Architecture, refactors, debugging strategy, and non-trivial reasoning.
+  - "What should we do?"
+- **Actor (Gemini Flash 3):**
+  - High-volume code edits, reading many files, fast iteration, running tests.
+  - "Do the work exactly as planned."
 
----
+### Single Source of Truth: `status.md`
 
-## 🚀 2. Practical Usage Guide
+Instead of relying on long, brittle chat histories, all cross-role context must be routed through `status.md`.
 
-### Discovery Efficiency
-- **Use `grep` First:** Quick lookups instead of full file reads.
-- **Context Truncation:** Long outputs should be summarized to keep the context window clear.
+***
 
-### Token Estimation Reference
-| Tier | Operations | Cost Est. |
-| :--- | :--- | :--- |
-| **Low** | Read 1-3 small files, update single doc | <50K |
-| **Medium** | Read 5-10 files, batch edits, consolidations | 50-200K |
-| **High** | Read large files (>1000 lines), complex refactoring | 200K+ |
+## 🧠 2. Planner Protocol (DeepSeek Reasoning)
 
----
+**Goal:** Produce concrete, numbered implementation plans with minimal token use and minimal file reads.
 
-## 📋 3. Session Checklist
-- [ ] Check `PROGRESS_TRACKER.md` for current status.
-- [ ] Plan batch operations and estimate token cost.
-- [ ] Batch related operations and cache file reads.
-- [ ] Update `PROGRESS_TRACKER.md` after each logical batch.
+### Rules for Planner
+
+- **Read `status.md` first.**
+- **Focus ONLY on:**
+  - Clarifying the goal.
+  - Producing a step-by-step plan.
+  - Identifying risks, unknowns, and invariants.
+- **Update `status.md` sections:**
+  - `Current Goal`
+  - `Plan (from DeepSeek)`
+  - `Open Problems`
+  - `Next Actions`
+- **Do NOT make large code edits.**
+
+***
+
+## ⚙️ 3. Actor Protocol (Gemini Flash 3)
+
+**Goal:** Perform large, efficient operations based on the plan in `status.md`.
+
+### Rules for Actor
+
+- **Treat `status.md` as the spec.**
+- **Implement the plan step by step.**
+- **Update `status.md` after each major step:**
+  - Append bullet points under `Work Done (by Gemini)`.
+  - Keep `Open Problems` and `Next Actions` accurate.
+- **Context Management:**
+  - If context is getting large (Check context usage > 80%):
+    - Summarize everything important into `status.md`.
+    - Stop and wait for another PLANNER pass or start a `/new_task`.
+
+***
+
+## 🔁 4. The Loop: Plan → Act → Handoff
+
+### Step 1 – Plan with DeepSeek
+Start a new task with DeepSeek.
+Prompt:
+> ROLE: PLANNER
+> Read `status.md` and the following files: `…`.
+> Clarify the current goal, then produce a concrete, numbered implementation plan, filling in the “Plan (from DeepSeek)” and “Next Actions” sections in `status.md`.
+> Do NOT implement code; just update `status.md`.
+
+### Step 2 – Act with Gemini
+Switch to Gemini Flash 3.
+Start a new task with this prompt:
+> ROLE: ACTOR
+> Use `status.md` as the spec.
+> Implement the steps in “Plan (from DeepSeek)”, keeping `status.md` up to date.
+> After implementing 1–3 steps, stop and show me the diff.
+
+### Step 3 – Handoff Back to Planner
+When reasoning is needed again or context is full:
+> Summarize everything important into `status.md` and then stop so the PLANNER can resume.
+
+***
+
+## 📋 5. Session Checklist
+
+- [ ] Ensure `.clinerules` is present and enforced.
+- [ ] Initialize/Update `status.md` at the start of every phase.
+- [ ] Use `/new_task` frequently to clear context and resume from `status.md`.
+- [ ] Verify each major plan step before moving to the next.

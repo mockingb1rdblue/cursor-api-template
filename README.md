@@ -1,76 +1,66 @@
-# 🚀 Cursor API & Environment Template
-**Author:** mock1ng  
-**Purpose:** A reusable framework for managing LLM rate limits, token efficiency, and consistent Cursor environments.
+# 🚀 Cline Two-Role Agent Template (Cursor)
+
+**Purpose:** A reusable framework for managing LLM efficiency, long-context stability, and consistent Cursor/Cline workflows using a DeepSeek (Planner) + Gemini (Actor) architecture.
 
 ---
 
 ## 📋 Features
 
-*   **[AI Collaboration Protocol](AI_COLLABORATION_PROTOCOL.md)**: Rules for AI efficiency (Batching, Caching, Atomic Edits).
-*   **[Progress Tracker](PROGRESS_TRACKER.md)**: Token usage & session log.
+*   **[Two-Role Agent System](AI_COLLABORATION_PROTOCOL.md)**: Optimized workflow using **DeepSeek Reasoning** (Planner) for strategy and **Gemini Flash 3** (Actor) for execution.
+*   **[Status Single Source of Truth (status.md)](status.md)**: A compact, curated state file that prevents context window bloating and allows seamless model handoffs.
+*   **[Automated Setup](setup.sh)**: Scripts to quickly initialize the template in any new or existing project.
+*   **[Enforced Protocols (.clinerules)](.clinerules)**: System-level instructions for Cline to maintain role boundaries and state synchronization.
 *   **[Environment Config](config/)**: Exported Cursor extensions, global settings, and keybindings.
-*   **[Markdown UI](.vscode/)**: Custom dark-mode CSS for beautiful Markdown previews.
 
 ---
 
 ## ⚡ QUICK START
 
-### Using This Template as a Reference
+### 1. Initialize Your Project
 
-To pull this repository for reference (not as a base for your project):
+Run the setup script in your project root to copy the necessary template files:
 
+**Bash (Linux/Mac/WSL):**
 ```bash
-git clone https://github.com/mockingb1rdblue/cursor-api-template.git
-cd cursor-api-template
+# If you have the repo cloned:
+./setup.sh /path/to/your/project
 ```
 
-**For Cursor Agents:** This repository is a **reference template**. When working with this repo:
-- **Do NOT** copy files into the root of this repository
-- **Do NOT** modify the template files directly
-- **DO** reference the protocols and structure when initializing new projects
-- **DO** read `AI_COLLABORATION_PROTOCOL.md` to understand the efficiency rules
-- **DO** use `PROGRESS_TRACKER.md` as a template to copy into new projects
+**PowerShell (Windows):**
+```powershell
+# If you have the repo cloned:
+.\setup.ps1 -TargetDir "C:\path\to\your\project"
+```
 
-### Initialize a New Project
+### 2. Configure Cline Providers
 
-1. Copy `AI_COLLABORATION_PROTOCOL.md` and `PROGRESS_TRACKER.md` to your project root.
-2. (Optional) Copy `.vscode/` folder to get the Markdown styling in your new project.
-3. **Important:** Add the template files to your project's `.gitignore` to prevent conflicts (see [TEMPLATE_README.md](TEMPLATE_README.md) for examples).
-4. Tell your Cursor Agent:
-   > "Read `AI_COLLABORATION_PROTOCOL.md` and follow the efficiency rules. Use `PROGRESS_TRACKER.md` to log our session usage."
+In Cline settings within Cursor:
+- **PLANNER:** Configure **DeepSeek** (via OpenRouter or DeepSeek API). Use `deepseek-reasoner`.
+- **ACTOR:** Configure **Gemini** (Google AI Studio). Use `gemini-2.0-flash`.
 
-> **Note:** See [TEMPLATE_README.md](TEMPLATE_README.md) for complete setup instructions, including `.gitignore` examples and code snippets.
+### 3. Start the Loop
 
----
-
-## 🎨 Markdown Styling
-
-This template includes a custom `.vscode/markdown-dark.css` and `settings.json` to ensure your documentation looks consistent and professional in the preview pane.
+1. **Plan:** Switch to **DeepSeek** and start a new task:
+   > ROLE: PLANNER. Read status.md. Clarify the goal and produce a numbered plan. Only update status.md.
+2. **Act:** Switch to **Gemini Flash 3** and start a new task:
+   > ROLE: ACTOR. Use status.md as the spec. Implement the plan step-by-step. Update status.md as you go.
 
 ---
 
-## 🛠️ Maintenance
+## 🛠️ Maintenance & Sync
 
 To update the exported config with your current Cursor settings:
 
 **Windows:**
-```cmd
+```powershell
 cursor --list-extensions > config\extensions.txt
-copy "%APPDATA%\Cursor\User\settings.json" config\global-settings.json
-copy "%APPDATA%\Cursor\User\keybindings.json" config\keybindings.json
+copy "$env:APPDATA\Cursor\User\settings.json" config\global-settings.json
+copy "$env:APPDATA\Cursor\User\keybindings.json" config\keybindings.json
 ```
 
-**Linux/Mac:**
+**Mac/Linux:**
 ```bash
 cursor --list-extensions > config/extensions.txt
-# Mac
-cp "$HOME/Library/Application Support/Cursor/User/settings.json" config/global-settings.json
-cp "$HOME/Library/Application Support/Cursor/User/keybindings.json" config/keybindings.json
-# Linux
-cp "$HOME/.config/Cursor/User/settings.json" config/global-settings.json
-cp "$HOME/.config/Cursor/User/keybindings.json" config/keybindings.json
+cp "$HOME/Library/Application Support/Cursor/User/settings.json" config/global-settings.json # Mac
+# cp "$HOME/.config/Cursor/User/settings.json" config/global-settings.json # Linux
 ```
-
----
-
-**Last Updated:** January 13, 2026

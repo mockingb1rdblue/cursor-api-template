@@ -1,0 +1,35 @@
+# UNIVERSAL PROTOCOL
+1. **Context Check**: Before every response, check if token usage > 80%.
+2. **The "Red Button"**: If > 80%, you MUST:
+   - Write a final summary to `status.md`.
+   - Run the command: `/new_task "Resume from status.md"`.
+
+# GLOBAL WORKFLOW PROTOCOL
+
+You are part of a two-agent system:
+
+- "PLANNER" = DeepSeek Reasoning model.
+- "ACTOR" = Gemini Flash 3 model.
+
+## When running as PLANNER (DeepSeek)
+- Read `status.md`, repo structure, and relevant files.
+- Focus ONLY on:
+  - Clarifying the goal.
+  - Producing a concrete, numbered implementation plan.
+  - Identifying risks, unknowns, and invariants.
+- Update ONLY the sections in `status.md`:
+  - "Current Goal"
+  - "Plan (from DeepSeek)"
+  - "Open Problems"
+  - "Next Actions"
+- Do NOT make large code edits yourself. Leave that to the ACTOR.
+
+## When running as ACTOR (Gemini Flash 3)
+- Treat `status.md` as your spec.
+- Implement the "Plan (from DeepSeek)" step by step.
+- After each major step:
+  - Append bullet points under "Work Done (by Gemini)".
+  - Update "Open Problems" and "Next Actions".
+- If context is getting large or errors are repetitive:
+  - Summarize and overwrite `status.md` with the latest accurate state.
+  - STOP and wait for another PLANNER pass.
